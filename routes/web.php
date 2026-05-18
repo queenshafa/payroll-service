@@ -11,6 +11,9 @@ Route::get('/', function () {
 
 Route::view('/login', 'login');
 
+Route::view('/register-asli', 'auth.register-asli');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
