@@ -9,6 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/login', 'login');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,6 +32,11 @@ Route::middleware('auth')->controller(SalaryController::class)->group(function()
     Route::get('salary/show/{employeeId}', 'show')->name('salary.show');
     Route::get('salary/download/{employeeId}', 'download')->name('salary.download');
     Route::delete('salary/delete/{employeeId}', 'delete')->name('salary.delete');
+});
+
+// Sidebar
+Route::get('/sidebar-preview', function () {
+    return view('layouts.sidebar');
 });
 
 require __DIR__.'/auth.php';
