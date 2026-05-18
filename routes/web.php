@@ -29,6 +29,7 @@ Route::middleware('auth')->controller(SalaryController::class)->group(function()
     Route::post('salary/store', 'store')->name('salary.store');
     Route::get('salary/show/{employeeId}', 'show')->name('salary.show');
     Route::get('salary/download/{employeeId}', 'download')->name('salary.download');
+    Route::delete('salary/delete/{employeeId}', 'delete')->name('salary.delete');
 });
 
 require __DIR__.'/auth.php';

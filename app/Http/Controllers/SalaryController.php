@@ -52,4 +52,12 @@ class SalaryController extends Controller
 
         return $pdf->download($filename);
     }
+
+    public function delete($id) {
+        $salary = Salary::findOrFail($id);
+        $salary->delete();
+
+    return redirect()->route('salary.index')->with('success', 'Slip gaji berhasil dihapus!');
+
+    }
 }

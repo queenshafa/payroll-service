@@ -101,8 +101,12 @@
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('salary.show', $salary->id) }}"
                                         class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Detail</a>
-                                    <button
-                                        class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
+                                    <form action="{{ route('salary.delete', $salary->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
