@@ -17,4 +17,8 @@ class Salary extends Model
         'bulan',
         'tahun', 
     ];
+
+    public function employee() {
+        return $this->belongsTo(Employee::class);
+    }
 }

@@ -72,7 +72,7 @@
                                 Pilih Karyawan <span class="text-red-400">*</span>
                             </label>
                             <input type="hidden" name="employee_id" value="{{ $employee->id }}" />
-                            <input type="text" value="{{ $employee->name }} ({{ $employee->nik }})" disabled
+                            <input type="text" value="{{ $employee->name }} ({{ $employee->nip }})" disabled
                                 class="w-full text-sm border border-gray-200 rounded-lg px-3 py-2.5 text-gray-700 bg-gray-50 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                         </div>
 

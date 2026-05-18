@@ -9,6 +9,13 @@
         </div>
     </div>
 
+    {{-- Alert Message --}}
+    @if (session('success'))
+        <div class="mb-4 px-4 py-3 bg-green-100 text-green-700 rounded-lg">
+            {{ session('success') }}
+        </div>
+    @endif
+
 
     {{-- ===== FILTER ===== --}}
     <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-6 flex flex-wrap items-center gap-3">
@@ -33,7 +40,7 @@
         <div class="flex items-center gap-2">
             <label class="text-sm text-gray-500 font-medium">Tahun</label>
             <select
-                class="text-sm border border-gray-200 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                class="text-sm border w-30 border-gray-200 rounded-lg px-8 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option>2023</option>
                 <option>2024</option>
                 <option selected>2025</option>
@@ -50,7 +57,7 @@
 
 
         <div class="px-6 py-4 border-b border-gray-100">
-            <h2 class="text-base font-semibold text-gray-700">Periode: Mei 2025</h2>
+            <h2 class="text-base font-semibold text-gray-700">Data Penggajian</h2>
         </div>
 
 
@@ -69,54 +76,45 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
+                    @forelse ($salaries as $salary)
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4 text-gray-400">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold text-xs shrink-0">
+                                        B</div>
+                                    <span class="font-medium text-gray-800">{{ $salary->employee->name }}</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-gray-500">{{ $salary->employee->position }}</td>
+                            <td class="px-6 py-4 text-right text-gray-700">Rp.
+                                {{ number_format($salary->gaji_pokok, 0, '.', '.') }}</td>
+                            <td class="px-6 py-4 text-right text-green-600 font-medium">+ Rp
+                                {{ number_format($salary->tunjangan_makan + $salary->tunjangan_transportasi, 0, '.', '.') }}
+                            </td>
+                            <td class="px-6 py-4 text-right text-red-500 font-medium">- Rp
+                                {{ number_format($salary->potongan, 0, '.', '.') }}</td>
+                            <td class="px-6 py-4 text-right font-bold text-gray-800">Rp
+                                {{ number_format($salary->gaji_bersih, 0, '.', '.') }}</td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('salary.show', $salary->id) }}"
+                                        class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Detail</a>
+                                    <button
+                                        class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td>Belum ada data gaji</td>
+                        </tr>
+                    @endforelse
 
-
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-gray-400">1</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold text-xs shrink-0">
-                                    B</div>
-                                <span class="font-medium text-gray-800">Budi Santoso</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-500">Programmer</td>
-                        <td class="px-6 py-4 text-right text-gray-700">Rp 5.000.000</td>
-                        <td class="px-6 py-4 text-right text-green-600 font-medium">+ Rp 1.000.000</td>
-                        <td class="px-6 py-4 text-right text-red-500 font-medium">- Rp 250.000</td>
-                        <td class="px-6 py-4 text-right font-bold text-gray-800">Rp 5.750.000</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center justify-center gap-2">
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Detail</a>
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition">PDF</a>
-                                <button
-                                    class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
-
-
-                {{-- Total Footer --}}
-                <tfoot>
-                    <tr class="bg-gray-50 border-t-2 border-gray-200">
-                        <td colspan="3" class="px-6 py-4 text-sm font-semibold text-gray-600">Total Pengeluaran</td>
-                        <td class="px-6 py-4 text-right text-sm font-semibold text-gray-700">Rp 24.500.000</td>
-                        <td class="px-6 py-4 text-right text-sm font-semibold text-green-600">+ Rp 4.700.000</td>
-                        <td class="px-6 py-4 text-right text-sm font-semibold text-red-500">- Rp 1.225.000</td>
-                        <td class="px-6 py-4 text-right text-sm font-bold text-blue-600">Rp 27.975.000</td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-
-
             </table>
         </div>
-
-
     </div>
     {{-- ===== END TABEL ===== --}}
 @endsection

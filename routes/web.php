@@ -27,6 +27,8 @@ Route::middleware('auth')->controller(SalaryController::class)->group(function()
     Route::get('salary/index', 'index')->name('salary.index');
     Route::get('salary/create/{employeeId}', 'create')->name('salary.create');
     Route::post('salary/store', 'store')->name('salary.store');
+    Route::get('salary/show/{employeeId}', 'show')->name('salary.show');
+    Route::get('salary/download/{employeeId}', 'download')->name('salary.download');
 });
 
 require __DIR__.'/auth.php';

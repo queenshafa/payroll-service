@@ -44,4 +44,4 @@ class SalaryRequest extends FormRequest
             'gaji_bersih'   => 'Belum ada data gaji bersih',
         ];
     }
-}
+ }
