@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <h1 class=" text-5xl text-primary font-bold mb-6">Hello, {{ auth()->user()->name }}</h1>
     {{-- ===== STAT CARDS ===== --}}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
 
 
         {{-- Total Karyawan --}}
-        <div class="bg-white rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
+        <div class="bg-primary rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
             <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -14,14 +15,14 @@
                 </svg>
             </div>
             <div>
-                <p class="text-sm text-gray-400 font-medium">Total Karyawan</p>
+                <p class="text-sm text-gray-800 font-medium">Total Karyawan</p>
                 <p class="text-2xl font-bold text-gray-800">24</p>
             </div>
         </div>
 
 
         {{-- Digaji Bulan Ini --}}
-        <div class="bg-white rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
+        <div class="bg-secondary rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
             <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,14 +30,14 @@
                 </svg>
             </div>
             <div>
-                <p class="text-sm text-gray-400 font-medium">Digaji Bulan Ini</p>
+                <p class="text-sm text-gray-800 font-medium">Digaji Bulan Ini</p>
                 <p class="text-2xl font-bold text-gray-800">20</p>
             </div>
         </div>
 
 
         {{-- Total Gaji Bulan Ini --}}
-        <div class="bg-white rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
+        <div class="bg-tertiary rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
             <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -44,14 +45,14 @@
                 </svg>
             </div>
             <div>
-                <p class="text-sm text-gray-400 font-medium">Total Gaji Bulan Ini</p>
+                <p class="text-sm text-gray-800 font-medium">Total Gaji Bulan Ini</p>
                 <p class="text-2xl font-bold text-gray-800">Rp 98.500.000</p>
             </div>
         </div>
 
 
         {{-- Periode --}}
-        <div class="bg-white rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
+        {{-- <div class="bg-white rounded-xl shadow-sm p-5 flex items-center gap-4 border border-gray-100">
             <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center shrink-0">
                 <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -62,7 +63,7 @@
                 <p class="text-sm text-gray-400 font-medium">Periode</p>
                 <p class="text-2xl font-bold text-gray-800">Mei 2025</p>
             </div>
-        </div>
+        </div> --}}
 
 
     </div>
@@ -78,7 +79,7 @@
         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 class="text-base font-semibold text-gray-700">Daftar Karyawan</h2>
             <a href="#"
-                class="inline-flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
+                class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -118,110 +119,12 @@
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-2">
                                 <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Edit</a>
+                                    class="px-3 py-1.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-blue-100 transition">Edit</a>
                                 <button
                                     class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
                             </div>
                         </td>
                     </tr>
-
-
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-gray-400">2</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-semibold text-xs shrink-0">
-                                    S</div>
-                                <span class="font-medium text-gray-800">Siti Rahayu</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-600">Designer</td>
-                        <td class="px-6 py-4 font-medium text-gray-800">Rp 4.500.000</td>
-                        <td class="px-6 py-4 text-gray-500">15 Jul 2021</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-2">
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Edit</a>
-                                <button
-                                    class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-gray-400">3</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-semibold text-xs shrink-0">
-                                    A</div>
-                                <span class="font-medium text-gray-800">Ahmad Fauzi</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-600">Network Engineer</td>
-                        <td class="px-6 py-4 font-medium text-gray-800">Rp 5.500.000</td>
-                        <td class="px-6 py-4 text-gray-500">10 Jan 2020</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-2">
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Edit</a>
-                                <button
-                                    class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-gray-400">4</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-yellow-100 text-yellow-600 flex items-center justify-center font-semibold text-xs shrink-0">
-                                    D</div>
-                                <span class="font-medium text-gray-800">Dewi Lestari</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-600">Database Administrator</td>
-                        <td class="px-6 py-4 font-medium text-gray-800">Rp 6.000.000</td>
-                        <td class="px-6 py-4 text-gray-500">20 Jun 2019</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-2">
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Edit</a>
-                                <button
-                                    class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-gray-400">5</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-3">
-                                <div
-                                    class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-semibold text-xs shrink-0">
-                                    R</div>
-                                <span class="font-medium text-gray-800">Reza Pratama</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-600">IT Support</td>
-                        <td class="px-6 py-4 font-medium text-gray-800">Rp 3.500.000</td>
-                        <td class="px-6 py-4 text-gray-500">05 Jan 2023</td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center gap-2">
-                                <a href="#"
-                                    class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Edit</a>
-                                <button
-                                    class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
-
-
                 </tbody>
             </table>
         </div>

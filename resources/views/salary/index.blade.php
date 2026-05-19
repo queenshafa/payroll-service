@@ -4,7 +4,7 @@
     {{-- ===== HEADER ===== --}}
     <div class="flex items-center justify-between mb-6">
         <div>
-            <h1 class="text-xl font-bold text-gray-800">Data Penggajian</h1>
+            <h1 class="text-xl font-bold text-primary">Data Penggajian</h1>
             <p class="text-sm text-gray-400 mt-0.5">Kelola slip gaji seluruh karyawan</p>
         </div>
     </div>
@@ -46,7 +46,7 @@
                 <option selected>2025</option>
             </select>
         </div>
-        <button class="px-4 py-2 bg-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition">
+        <button class="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
             Tampilkan
         </button>
     </div>
@@ -100,7 +100,7 @@
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('salary.show', $salary->id) }}"
-                                        class="px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition">Detail</a>
+                                        class="px-3 py-1.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary/80 transition">Detail</a>
                                     <form action="{{ route('salary.delete', $salary->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
