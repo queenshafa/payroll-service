@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- ===== HEADER ===== --}}
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h1 class="text-xl font-bold text-primary">Data Penggajian</h1>
-            <p class="text-sm text-gray-400 mt-0.5">Kelola slip gaji seluruh karyawan</p>
-        </div>
+    {{-- Header --}}
+    <div class="h-[100px] flex flex-col justify-center px-6 bg-cover bg-center rounded-lg mb-8"
+        style="background-image: url('{{ asset('assets/title-bg.png') }}');">
+        <h1 class="text-3xl font-bold text-white mb-2">Data Penggajian</h1>
+        <p class="text-white">Kelola slip gaji seluruh karyawan</p>
     </div>
 
     {{-- Alert Message --}}
@@ -16,8 +15,6 @@
         </div>
     @endif
 
-
-    {{-- ===== FILTER ===== --}}
     <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 mb-6 flex flex-wrap items-center gap-3">
         <div class="flex items-center gap-2">
             <label class="text-sm text-gray-500 font-medium">Bulan</label>
@@ -51,16 +48,10 @@
         </button>
     </div>
 
-
-    {{-- ===== TABEL PENGGAJIAN ===== --}}
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-
-
         <div class="px-6 py-4 border-b border-gray-100">
             <h2 class="text-base font-semibold text-gray-700">Data Penggajian</h2>
         </div>
-
-
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>
@@ -120,5 +111,4 @@
             </table>
         </div>
     </div>
-    {{-- ===== END TABEL ===== --}}
 @endsection

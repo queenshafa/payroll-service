@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class=" text-5xl text-primary font-bold mb-6">Hello, {{ auth()->user()->name }}</h1>
+    <div class="h-[100px] flex items-center px-6 bg-cover bg-center rounded-lg mb-4"
+        style="background-image: url('{{ asset('assets/title-bg.png') }}');">
+        <h1 class="text-5xl text-white font-bold">
+            Hello, {{ auth()->user()->name }}
+        </h1>
+    </div>
     {{-- ===== STAT CARDS ===== --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
 

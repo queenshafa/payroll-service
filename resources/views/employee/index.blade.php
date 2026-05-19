@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- ===== HEADER ===== --}}
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-primary mb-2">Data Karyawan</h1>
-        <p class="text-gray-500">Kelola informasi karyawan dan data lengkap mereka</p>
+    {{-- Header --}}
+    <div class="h-[100px] flex flex-col justify-center px-6 bg-cover bg-center rounded-lg mb-8"
+        style="background-image: url('{{ asset('assets/title-bg.png') }}');">
+        <h1 class="text-3xl font-bold text-white mb-2">Data Karyawan</h1>
+        <p class="text-white">Kelola informasi karyawan dan data lengkap mereka</p>
     </div>
 
     {{-- Alert Message --}}
@@ -14,13 +15,10 @@
         </div>
     @endif
 
-    {{-- ===== TABLE SECTION ===== --}}
+    {{-- Table Section --}}
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-
-        {{-- Header dengan Tombol Tambah --}}
         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <h2 class="text-base font-semibold text-gray-700">Daftar Karyawan</h2>
-            {{-- {{ route('karyawan.create') }} --}}
             <a href="{{ route('karyawan.create') }}"
                 class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,5 +108,4 @@
 
         </div>
     </div>
-    {{-- ===== END TABLE SECTION ===== --}}
 @endsection
