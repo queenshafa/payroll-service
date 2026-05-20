@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 
 <head>
@@ -10,23 +10,20 @@
             box-sizing: border-box;
         }
 
-
         body {
-            font-family: 'DejaVu Sans', sans-serif;
+            font-family: "DejaVu Sans", sans-serif;
             font-size: 12px;
             color: #1f2937;
             background: #fff;
         }
 
-
         .page {
             padding: 40px;
         }
 
-
         /* ── Header perusahaan ── */
         .company-header {
-            border-bottom: 2px solid #2563eb;
+            border-bottom: 2px solid #92abfd;
             padding-bottom: 16px;
             margin-bottom: 24px;
         }
@@ -34,13 +31,15 @@
         .company-name {
             font-size: 18px;
             font-weight: bold;
-            color: #2563eb;
+            color: #92abfd;
+            text-align: center;
         }
 
         .company-sub {
             font-size: 11px;
             color: #6b7280;
             margin-top: 2px;
+            text-align: center;
         }
 
         .slip-title {
@@ -48,20 +47,21 @@
             font-size: 14px;
             font-weight: bold;
             color: #1f2937;
+            text-align: start;
         }
 
         .slip-period {
-            text-align: right;
+            text-align: start;
             font-size: 11px;
             color: #6b7280;
             margin-top: 2px;
+            margin-bottom: 20px;
         }
-
 
         /* ── Info karyawan ── */
         .info-box {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
+            background: #92abfd;
+            border: 1px solid #4262cc;
             border-radius: 6px;
             padding: 14px 18px;
             margin-bottom: 20px;
@@ -78,20 +78,19 @@
         }
 
         .info-box td:first-child {
-            color: #6b7280;
+            color: #fff;
             width: 140px;
         }
 
         .info-box td:nth-child(2) {
             width: 10px;
-            color: #6b7280;
+            color: #fff;
         }
 
         .info-box td:last-child {
             font-weight: 600;
-            color: #111827;
+            color: #fff;
         }
-
 
         /* ── Tabel komponen gaji ── */
         .section-title {
@@ -102,6 +101,7 @@
             letter-spacing: 0.05em;
             margin-bottom: 6px;
             margin-top: 16px;
+            margin-top: 5rem;
         }
 
         .salary-table {
@@ -133,7 +133,6 @@
             color: #dc2626;
         }
 
-
         /* ── Total ── */
         .total-box {
             border-top: 2px dashed #d1d5db;
@@ -163,7 +162,6 @@
             font-weight: bold;
             color: #1f2937;
         }
-
 
         /* ── Footer ── */
         .footer {
@@ -215,69 +213,70 @@
 
 <body>
     <div class="page">
-
-
-        {{-- ===== HEADER ===== --}}
-        <table style="width:100%; margin-bottom: 24px; border-bottom: 2px solid #2563eb; padding-bottom: 14px;">
+        <!-- header -->
+        <table
+            style="
+          width: 100%;
+          margin-bottom: 24px;
+          border-bottom: 2px solid #92abfd;
+          padding-bottom: 14px;
+        ">
             <tr>
                 <td>
-                    <div class="company-name">PT. Nama Perusahaan</div>
-                    <div class="company-sub">Jl. Contoh Alamat No. 1, Kota, Indonesia</div>
-                    <div class="company-sub">Telp: (021) 000-0000 &nbsp;|&nbsp; hr@perusahaan.com</div>
-                </td>
-                <td style="text-align: right; vertical-align: top;">
-                    <div class="slip-title">SLIP GAJI</div>
-                    <div class="slip-period">
-                        Periode:
-                        @php
-                            $namaBulan = [
-                                1 => 'Januari',
-                                2 => 'Februari',
-                                3 => 'Maret',
-                                4 => 'April',
-                                5 => 'Mei',
-                                6 => 'Juni',
-                                7 => 'Juli',
-                                8 => 'Agustus',
-                                9 => 'September',
-                                10 => 'Oktober',
-                                11 => 'November',
-                                12 => 'Desember',
-                            ];
-                        @endphp
-                        {{ $namaBulan[$salary->bulan] }} {{ $salary->tahun }}
+                    <div class="company-name">PT. Vengeance</div>
+                    <div class="company-sub">
+                        300 Hidden Figures Way SW (formerly 300 E Street SW), Washington,
+                        D.C
+                    </div>
+                    <div class="company-sub">
+                        Telp: (021) 676-6767 &nbsp;|&nbsp; hr@vengeance.com
                     </div>
                 </td>
             </tr>
         </table>
 
+        <table>
+            <tr>
+                <td style="text-align: right; vertical-align: top">
+                    <div class="slip-title">SLIP GAJI</div>
+                    <div class="slip-period">
+                        Periode: @php $namaBulan = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember']; @endphp {{ $namaBulan[$salary->bulan] }} {{ $salary->tahun }}
+                    </div>
+                </td>
+            </tr>
+        </table>
 
-        {{-- ===== INFO KARYAWAN ===== --}}
+        <!-- Info karyawan -->
         <div class="info-box">
             <table>
                 <tr>
                     <td>Nama Karyawan</td>
                     <td>:</td>
-                    <td>{{ $salary->employee->name }}</td>
-                    <td style="width:60px"></td>
-                    <td style="color:#6b7280; width:120px">NIK</td>
-                    <td style="width:10px; color:#6b7280">:</td>
-                    <td style="font-weight:600; color:#111827">{{ $salary->employee->nik }}</td>
+                    <td style="color: #fff">{{ $salary->employee->name }}</td>
+                    <td style="width: 60px"></td>
+                    <td style="color: #fff; width: 120px">NIP</td>
+                    <td style="width: 10px; color: #fff">:</td>
+                    <td style="font-weight: 600; color: #fff">
+                        {{ $salary->employee->nip }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Jabatan</td>
                     <td>:</td>
-                    <td>{{ $salary->employee->position ?? '-' }}</td>
+                    <td style="color: #fff">
+                        {{ $salary->employee->position ?? '-' }}
+                    </td>
                     <td></td>
-                    <td style="color:#6b7280">Departemen</td>
-                    <td style="color:#6b7280">:</td>
-                    <td style="font-weight:600; color:#111827">{{ $salary->employee->department ?? '-' }}</td>
+                    <td style="color: #fff">Departemen</td>
+                    <td style="color: #fff">:</td>
+                    <td style="font-weight: 600; color: #fff">
+                        {{ $salary->employee->department ?? '-' }}
+                    </td>
                 </tr>
             </table>
         </div>
 
-
-        {{-- ===== PENDAPATAN ===== --}}
+        <!-- pendapatan -->
         <div class="section-title">Pendapatan</div>
         <table class="salary-table">
             <tr>
@@ -286,26 +285,30 @@
             </tr>
             <tr>
                 <td>Tunjangan Makan</td>
-                <td class="text-green">+ Rp {{ number_format($salary->tunjangan_makan, 0, ',', '.') }}</td>
+                <td class="text-green">
+                    + Rp {{ number_format($salary->tunjangan_makan, 0, ',', '.') }}
+                </td>
             </tr>
             <tr>
                 <td>Tunjangan Transportasi</td>
-                <td class="text-green">+ Rp {{ number_format($salary->tunjangan_transportasi, 0, ',', '.') }}</td>
+                <td class="text-green">
+                    + Rp {{ number_format($salary->tunjangan_transportasi, 0, ',', '.') }}
+                </td>
             </tr>
         </table>
 
-
-        {{-- ===== POTONGAN ===== --}}
+        <!-- Potongan -->
         <div class="section-title">Potongan</div>
         <table class="salary-table">
             <tr>
                 <td>Potongan</td>
-                <td class="text-red">- Rp {{ number_format($salary->potongan, 0, ',', '.') }}</td>
+                <td class="text-red">
+                    - Rp {{ number_format($salary->potongan, 0, ',', '.') }}
+                </td>
             </tr>
         </table>
 
-
-        {{-- ===== TOTAL ===== --}}
+        <!-- Total -->
         <div class="total-box">
             <table>
                 <tr>
@@ -315,29 +318,26 @@
             </table>
         </div>
 
-
-        {{-- ===== TTD ===== --}}
+        <!-- TTD -->
         <div class="ttd-box">
             <p>Hormat kami,</p>
-            <p style="margin-top:4px; font-size:11px; color:#6b7280">
-                {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+            <p style="margin-top: 4px; font-size: 11px; color: #6b7280">
+                {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
+            </p>
             <div class="ttd-line"></div>
             <div class="ttd-name">HRD / Manager</div>
         </div>
 
-
-        {{-- ===== FOOTER ===== --}}
+        <!-- Footer -->
         <div class="footer">
             <div class="footer-left">
-                Dokumen ini digenerate otomatis oleh sistem payroll.<br>
+                Dokumen ini digenerate otomatis oleh sistem payroll.<br />
                 Tidak memerlukan tanda tangan basah.
             </div>
             <div class="footer-right">
                 Dicetak: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
             </div>
         </div>
-
-
     </div>
 </body>
 
