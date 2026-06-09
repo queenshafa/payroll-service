@@ -4,8 +4,8 @@
     {{-- Header --}}
     <div class="h-[100px] flex flex-col justify-center px-6 bg-cover bg-center rounded-lg mb-8"
         style="background-image: url('{{ asset('assets/title-bg.png') }}');">
-        <h1 class="text-3xl font-bold text-white mb-2">Data Karyawan</h1>
-        <p class="text-white">Kelola informasi karyawan dan data lengkap mereka</p>
+        <h1 class="text-3xl font-bold text-white mb-2">Employee Data</h1>
+        <p class="text-white">Manage employee information and their complete data.</p>
     </div>
 
     {{-- Alert Message --}}
@@ -18,20 +18,20 @@
     {{-- Table Section --}}
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
-            <h2 class="text-base font-semibold text-gray-700">Daftar Karyawan</h2>
+            <h2 class="text-base font-semibold text-gray-700">Employee List</h2>
             <a href="{{ route('karyawan.create') }}"
                 class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/80 transition">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
-                Tambah Karyawan
+                Add Employee
             </a>
         </div>
 
         {{-- Search & Filter --}}
         <div class="px-6 py-4 border-b border-gray-100 flex gap-3">
             <div class="flex-1">
-                <input type="text" placeholder="Cari nama atau NIK karyawan..."
+                <input type="text" placeholder="Find name or employee's ID.."
                     class="w-full px-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
             </div>
             <button class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition">
@@ -48,11 +48,11 @@
                 <thead>
                     <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
                         <th class="px-6 py-3 text-left font-semibold">No</th>
-                        <th class="px-6 py-3 text-left font-semibold">Nama</th>
-                        <th class="px-6 py-3 text-left font-semibold">NIP</th>
-                        <th class="px-6 py-3 text-left font-semibold">Jabatan</th>
-                        <th class="px-6 py-3 text-left font-semibold">Gaji Pokok</th>
-                        <th class="px-6 py-3 text-center font-semibold">Aksi</th>
+                        <th class="px-6 py-3 text-left font-semibold">Name</th>
+                        <th class="px-6 py-3 text-left font-semibold">ID</th>
+                        <th class="px-6 py-3 text-left font-semibold">Position</th>
+                        <th class="px-6 py-3 text-left font-semibold">Basic Salary</th>
+                        <th class="px-6 py-3 text-center font-semibold">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -65,15 +65,6 @@
                             <td class="px-6 py-4 text-gray-600">Rp. {{ number_format($employee->salary, 0, '.', '.') }}</td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-center gap-2">
-
-                                    {{-- Tambah Gaji Button --}}
-                                    <a href="{{ route('salary.create', $employee->id) }}"
-                                        class="inline-flex items-center gap-1.5 px-3 py-1.5 text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition text-xs font-medium">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                    </a>
 
                                     {{-- Edit Button --}}
                                     <a href="{{ route('karyawan.edit', $employee->id) }}"

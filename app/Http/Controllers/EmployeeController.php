@@ -28,4 +28,18 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         return view('employee.edit', compact('employee'));
     }
+
+    public function update(EmployeeRequest $request, $id) {
+        $employee = Employee::findOrFail($id);
+
+        $employee->update([
+            'name' => $request->name,
+            'nip' => $request->nip,
+            'position' => $request->position,
+            'salary' => $request->salary,
+            'join_date' => $request->join_date,
+        ]);
+
+        return redirect()->route('karyawan.index');
+    }
 }

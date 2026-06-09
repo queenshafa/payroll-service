@@ -21,7 +21,7 @@
             padding: 40px;
         }
 
-        /* ── Header perusahaan ── */
+        /* ── Company Header ── */
         .company-header {
             border-bottom: 2px solid #92abfd;
             padding-bottom: 16px;
@@ -58,7 +58,7 @@
             margin-bottom: 20px;
         }
 
-        /* ── Info karyawan ── */
+        /* ── Employee Info ── */
         .info-box {
             background: #92abfd;
             border: 1px solid #4262cc;
@@ -92,7 +92,7 @@
             color: #fff;
         }
 
-        /* ── Tabel komponen gaji ── */
+        /* ── Salary Component Table ── */
         .section-title {
             font-size: 11px;
             font-weight: bold;
@@ -238,7 +238,7 @@
         <table>
             <tr>
                 <td style="text-align: right; vertical-align: top">
-                    <div class="slip-title">SLIP GAJI</div>
+                    <div class="slip-title">PAYSLIP</div>
                     <div class="slip-period">
                         Periode: @php $namaBulan = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember']; @endphp {{ $namaBulan[$salary->bulan] }} {{ $salary->tahun }}
                     </div>
@@ -246,22 +246,22 @@
             </tr>
         </table>
 
-        <!-- Info karyawan -->
+        <!-- Employee Info -->
         <div class="info-box">
             <table>
                 <tr>
-                    <td>Nama Karyawan</td>
+                    <td>Employee Name</td>
                     <td>:</td>
                     <td style="color: #fff">{{ $salary->employee->name }}</td>
                     <td style="width: 60px"></td>
-                    <td style="color: #fff; width: 120px">NIP</td>
+                    <td style="color: #fff; width: 120px">ID</td>
                     <td style="width: 10px; color: #fff">:</td>
                     <td style="font-weight: 600; color: #fff">
                         {{ $salary->employee->nip }}
                     </td>
                 </tr>
                 <tr>
-                    <td>Jabatan</td>
+                    <td>Position</td>
                     <td>:</td>
                     <td style="color: #fff">
                         {{ $salary->employee->position ?? '-' }}
@@ -276,32 +276,32 @@
             </table>
         </div>
 
-        <!-- pendapatan -->
-        <div class="section-title">Pendapatan</div>
+        <!-- Income -->
+        <div class="section-title">Income</div>
         <table class="salary-table">
             <tr>
-                <td>Gaji Pokok</td>
+                <td>Basic Salary</td>
                 <td>Rp {{ number_format($salary->gaji_pokok, 0, ',', '.') }}</td>
             </tr>
             <tr>
-                <td>Tunjangan Makan</td>
+                <td>Meal Allowances</td>
                 <td class="text-green">
                     + Rp {{ number_format($salary->tunjangan_makan, 0, ',', '.') }}
                 </td>
             </tr>
             <tr>
-                <td>Tunjangan Transportasi</td>
+                <td>Transportation Allowances</td>
                 <td class="text-green">
                     + Rp {{ number_format($salary->tunjangan_transportasi, 0, ',', '.') }}
                 </td>
             </tr>
         </table>
 
-        <!-- Potongan -->
-        <div class="section-title">Potongan</div>
+        <!-- Deductions -->
+        <div class="section-title">Deductions</div>
         <table class="salary-table">
             <tr>
-                <td>Potongan</td>
+                <td>Deductions</td>
                 <td class="text-red">
                     - Rp {{ number_format($salary->potongan, 0, ',', '.') }}
                 </td>
@@ -312,15 +312,15 @@
         <div class="total-box">
             <table>
                 <tr>
-                    <td class="total-label">Gaji Bersih Diterima</td>
+                    <td class="total-label">Net Salary Received</td>
                     <td>Rp {{ number_format($salary->gaji_bersih, 0, ',', '.') }}</td>
                 </tr>
             </table>
         </div>
 
-        <!-- TTD -->
+        <!-- Handsign -->
         <div class="ttd-box">
-            <p>Hormat kami,</p>
+            <p>Best Regards,</p>
             <p style="margin-top: 4px; font-size: 11px; color: #6b7280">
                 {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
             </p>
@@ -331,11 +331,11 @@
         <!-- Footer -->
         <div class="footer">
             <div class="footer-left">
-                Dokumen ini digenerate otomatis oleh sistem payroll.<br />
-                Tidak memerlukan tanda tangan basah.
+                This document is generated automatically by the payroll system,<br />
+                No wet signature required.
             </div>
             <div class="footer-right">
-                Dicetak: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
+                Printed: {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
             </div>
         </div>
     </div>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryController;
+use App\Models\Employee;
+use App\Models\Salary;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,7 +17,20 @@ Route::view('/register-asli', 'auth.register-asli');
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $employees = Employee::all();
+
+    $totalEmployees = Employee::count();
+
+    $paidThisMonth = Salary::where('bulan', now()->month)
+        ->where('tahun', now()->year)
+        ->count();
+
+    $totalSalaryThisMonth = Salary::where('bulan', now()->month)
+        ->where('tahun', now()->year)
+        ->sum('gaji_bersih');
+
+
+    return view('dashboard', compact('employees', 'totalEmployees', 'paidThisMonth', 'totalSalaryThisMonth'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Kelola Karyawan
@@ -24,6 +39,7 @@ Route::middleware('auth')->controller(EmployeeController::class)->group(function
     Route::get('karyawan/create', 'create')->name('karyawan.create');
     Route::post('karyawan/store', 'store')->name('karyawan.store');
     Route::get('karyawan/edit/{id}', 'edit')->name('karyawan.edit');
+    Route::put('karyawan/update/{id}', 'update')->name('karyawan.update');
     Route::delete('karyawan/destroy', 'destroy')->name('karyawan.destroy');
 });
 
