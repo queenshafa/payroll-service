@@ -41,4 +41,11 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Install production PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-CMD ["apache2-foreground"]
+# Set folders permissions for Laravel
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Install production PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Run migrations if flagged, then boot Apache
+CMD sh -c "if [ \"\$RUN_MIGRATIONS\" = \"true\" ]; then php artisan migrate --force; fi && apache2-foreground"
