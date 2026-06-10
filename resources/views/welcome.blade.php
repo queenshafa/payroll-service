@@ -11,10 +11,10 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class=" bg-gray-100">
-    <section class="h-screen px-12 py-8  flex flex-col">
+<body class="bg-gray-100">
+    <section class="min-h-screen px-12 pt-8 pb-10 flex flex-col">
         <header
-            class=" mb-24 rounded-xl bg-white shadow-sm flex items-center justify-between px-6 py-4 border-b border-gray-100">
+            class="mb-24 rounded-xl bg-white shadow-sm flex items-center justify-between px-2 py-2 lg:px-6 lg:py-4 border-b border-gray-100">
             <div class="flex items-center gap-2 font-bold text-primary">
                 <span
                     class="text-lg flex items-center gap-x-2 font-bold bg-white py-1.5 px-3 rounded-lg text-primary"><img
@@ -22,9 +22,9 @@
             </div>
             <div class="flex gap-3">
                 <a href="{{ route('login') }}"
-                    class="inline-flex items-center gap-1.5 px-6 py-2 bg-primary text-white text-lg font-medium rounded-lg hover:bg-primary/80 transition">Login</a>
+                    class="inline-flex items-center gap-1.5 px-6 py-2 bg-primary text-white text-sm lg:text-lg font-medium rounded-lg hover:bg-primary/80 transition">Login</a>
                 <a href="{{ route('register') }}"
-                    class="inline-flex items-center gap-1.5 px-6 py-2 bg-secondary text-primary text-lg font-medium rounded-lg hover:bg-secondary/80 transition">Register</a>
+                    class="inline-flex items-center gap-1.5 px-6 py-2 bg-secondary text-primary text-sm lg:text-lg font-medium rounded-lg hover:bg-secondary/80 transition">Register</a>
             </div>
         </header>
 
@@ -46,16 +46,16 @@
                         simple web-based
                         application.</p>
 
-                    <div class="flex gap-x-5">
+                    <div class="flex gap-x-5 lg:w-1/2">
                         <a href="{{ route('register') }}"
-                            class="inline-flex items-center gap-1.5 px-12 py-3 bg-primary text-white text-lg font-medium rounded-lg hover:bg-primary/80 transition">Get
+                            class="lg:inline-flex items-center justify-center gap-1.5 w-1/2 text-center lg:px-4 py-3 bg-primary text-white text-lg font-medium rounded-lg hover:bg-primary/80 transition">Get
                             Started</a>
                         <a href="{{ route('login') }}"
-                            class="inline-flex items-center gap-1.5 px-12 py-3 border border-gray-600 text-gray-600 text-lg font-medium rounded-lg hover:bg-secondary hover:text-primary transition">Login</a>
+                            class="lg:inline-flex items-center justify-center gap-1.5 w-1/2 text-center lg:px-4 py-3 border border-gray-600 text-gray-600 text-lg font-medium rounded-lg hover:bg-secondary hover:text-primary transition">Login</a>
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-12 h-96 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 lg:h-96 gap-6">
                 {{-- Card 1 --}}
                 <div class="col-span-6 lg:col-span-3 bg-secondary flex flex-col justify-between p-6 rounded-xl">
                     <h3 class="text-4xl font-semibold text-primary mb-4">
@@ -83,6 +83,10 @@
             </div>
         </div>
     </section>
+
+    <footer class="text-center py-4 bg-primary text-white rounded-t-2xl visible lg:hidden">
+        <p class="font-medium">&copy; 2026 – Salario</p>
+    </footer>
 </body>
 
 </html>
