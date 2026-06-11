@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
+
 @section('content')
     {{-- Header --}}
     <div class="h-[100px] flex flex-col justify-center px-6 bg-cover bg-center rounded-lg mb-8"
         style="background-image: url('{{ asset('assets/title-bg.png') }}');">
-        <h1 class="text-3xl font-bold text-white mb-2">Employee Data</h1>
-        <p class="text-white">Manage employee information and their complete data.</p>
+        <h1 class="text-2xl lg:text-3xl font-bold text-white mb-2">Employee Data</h1>
+        <p class="text-sm lg:text-base text-white">Manage employee information and their complete data.</p>
     </div>
 
     {{-- Alert Message --}}

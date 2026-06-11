@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Salario Dashboard' }}</title>
     <link rel="shortcut icon" href="{{ asset('assets/salario-logo.png') }}" type="image/x-icon">
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100 font-sans antialiased">
-
-
-    <div class="flex min-h-screen">
-        <aside class="w-64 bg-primary shadow-md flex flex-col m-6 rounded-lg ">
+    <div class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" id="sidebarOverlay">
+    </div>
+    <div class="flex min-h-screen relative">
+        <aside id="sidebar"
+            class="fixed lg:static top-0 left-0 h-full lg:h-auto w-64 bg-primary shadow-md flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 lg:m-6 rounded-lg">
 
             {{-- Logo --}}
             <div class="h-16 flex items-center justify-center mt-3">
@@ -82,28 +83,42 @@
                 </form>
             </div>
         </aside>
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col w-full min-w-0">
 
             {{-- Topbar --}}
             <header
-                class="h-16 m-6 rounded-lg bg-white shadow-sm flex items-center justify-between px-6 border-b border-gray-100">
-                <h1 class="text-lg font-semibold text-primary">{{ $title ?? 'Dashboard' }}</h1>
+                class="m-6 rounded-lg bg-white shadow-sm flex items-center justify-between p-4 sm:px-6 border-b border-gray-100 max-w-7xl lg:w-full mx-auto w-[calc(100%-3rem)]">
+                <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+                    <button id="hamburgerBtn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 flex-shrink-0">
+                        <i class="ri-menu-5-line"></i>
+                    </button>
+                    <h1 class="text-sm lg:text-lg font-semibold text-primary truncate">{{ $title ?? 'Dashboard' }}</h1>
+                </div>
                 <span
-                    class="text-sm text-black bg-secondary p-2 rounded-lg">{{ now()->translatedFormat('l, d F Y') }}</span>
+                    class="text-sm text-black bg-secondary p-2 rounded-lg whitespace-nowrap flex-shrink-0 ml-2">{{ now()->translatedFormat('l, d F Y') }}</span>
             </header>
 
             {{-- Page Content --}}
-            <main class="flex-1 px-6 overflow-auto">
+            <main class="flex-1 px-6 lg:p-0 overflow-auto w-full max-w-7xl mx-auto">
                 @yield('content')
             </main>
-
-
         </div>
-
-
     </div>
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const hamburger = document.getElementById('hamburgerBtn');
 
+        hamburger?.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        })
 
+        overlay?.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        })
+    </script>
 </body>
 
 </html>

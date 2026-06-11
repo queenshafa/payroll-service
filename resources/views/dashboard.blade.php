@@ -3,7 +3,7 @@
 @section('content')
     <div class="h-[100px] flex items-center px-6 bg-cover bg-center rounded-lg mb-4"
         style="background-image: url('{{ asset('assets/title-bg.png') }}');">
-        <h1 class="text-5xl text-white font-bold">
+        <h1 class="text-3xl lg:text-5xl text-white font-bold">
             Hello, {{ auth()->user()->name }}
         </h1>
     </div>
