@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryController;
 use App\Models\Employee;
 use App\Models\Salary;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,15 +18,17 @@ Route::view('/register-asli', 'auth.register-asli');
 
 
 Route::get('/dashboard', function () {
-    $employees = Employee::all();
+    $employees = Employee::where('user_id', Auth::id())->get();
 
-    $totalEmployees = Employee::count();
+    $totalEmployees = Employee::where('user_id', Auth::id())->count();
 
-    $paidThisMonth = Salary::where('bulan', now()->month)
+    $paidThisMonth = Salary::where('user_id', Auth::id())
+        ->where('bulan', now()->month)
         ->where('tahun', now()->year)
         ->count();
 
-    $totalSalaryThisMonth = Salary::where('bulan', now()->month)
+    $totalSalaryThisMonth = Salary::where('user_id', Auth::id())
+        ->where('bulan', now()->month)
         ->where('tahun', now()->year)
         ->sum('gaji_bersih');
 

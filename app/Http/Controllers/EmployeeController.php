@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
     public function index() {
-        // Mengambil data karyawan melalui model
-        $employees = Employee::all();
+        $employees = Employee::where('user_id', Auth::id())->get();
+        
         return view('employee.index', compact('employees'));
     }
 
@@ -19,18 +20,23 @@ class EmployeeController extends Controller
     }
 
     public function store(EmployeeRequest $request) {
-        Employee::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+
+        Employee::create($data);
+
         return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil ditambahkan!');
     }
 
     public function edit($id) {
-        // Mencati data karyawan berdasarkan id
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::where('user_id', Auth::id())
+            ->findOrFail($id);
         return view('employee.edit', compact('employee'));
     }
 
     public function update(EmployeeRequest $request, $id) {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::where('user_id', Auth::id())
+            ->findOrFail($id);
 
         $employee->update([
             'name' => $request->name,

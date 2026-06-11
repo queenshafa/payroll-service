@@ -7,42 +7,58 @@ use App\Models\Employee;
 use App\Models\Salary;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalaryController extends Controller
 {
     public function index() {
-        $salaries = Salary::all();
+        $salaries = Salary::whereHas('employee', function ($query) {
+            $query->where('user_id', Auth::id());
+        })
+        ->with('employee')
+        ->get();
+
         return view('salary.index', compact('salaries'));
     }
 
     public function create($employeeId) {
-        $employee = Employee::findOrFail($employeeId);
+        $employee = Employee::where('user_id', Auth::id())
+            ->findOrFail($employeeId);
+
         return view('salary.create', compact('employee'));
     }
 
     public function store(SalaryRequest $request) {
+        $employee = Employee::where('user_id', Auth::id())
+            ->findOrFail($request->employee_id);
+
         Salary::create([
-            'employee_id'               => $request->employee_id,
-            'gaji_pokok'                => $request->gaji_pokok,
-            'tunjangan_makan'           => $request->tunjangan_makan,
-            'tunjangan_transportasi'    => $request->tunjangan_transportasi,
-            'potongan'                  => $request->potongan ?? 0,
-            'gaji_bersih'               => $request->gaji_bersih,
-            'bulan'                     => $request->bulan, 
-            'tahun'                     => $request->tahun, 
+            'employee_id' => $employee->id,
+            'gaji_pokok' => $request->gaji_pokok,
+            'tunjangan_makan' => $request->tunjangan_makan,
+            'tunjangan_transportasi' => $request->tunjangan_transportasi,
+            'potongan' => $request->potongan ?? 0,
+            'gaji_bersih' => $request->gaji_bersih,
+            'bulan' => $request->bulan,
+            'tahun' => $request->tahun,
         ]);
 
-        return redirect()->route('salary.index')->with('success', 'Gaji berhasil ditambahkan!');
+        return redirect()->route('salary.index')
+            ->with('success', 'Gaji berhasil ditambahkan!');
     }
 
     public function show($id) {
-        $salary = Salary::findOrFail($id);
+        $salary = Salary::where('user_id', Auth::id())
+            ->findOrFail($id);
+
         return view('salary.show', compact('salary'));
     }
 
     public function download($id) {
         // Dapatkan data yang ingin dibuat pdf
-        $salary = Salary::with('employee')->findOrFail($id);
+        $salary = Salary::where('user_id', Auth::id())
+            ->with('employee')
+            ->findOrFail($id);
 
         // Membuat PDF
         $pdf = Pdf::loadView('salary.pdf', compact('salary'))->setPaper('a4', 'potrait');
@@ -54,7 +70,8 @@ class SalaryController extends Controller
     }
 
     public function delete($id) {
-        $salary = Salary::findOrFail($id);
+        $salary = Salary::where('user_id', Auth::id())
+            ->findOrFail($id);
         $salary->delete();
 
     return redirect()->route('salary.index')->with('success', 'Slip gaji berhasil dihapus!');

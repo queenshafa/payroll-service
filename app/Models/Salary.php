@@ -8,6 +8,7 @@ class Salary extends Model
 {
     protected $table = 'salaries';
     protected $fillable = [
+        'user_id',
         'employee_id',
         'gaji_pokok',
         'tunjangan_makan',
