@@ -15,4 +15,8 @@ class Employee extends Model
         'salary',
         'join_date'
     ];
+
+    public function salaries() {
+        return $this->hasMany(Salary::class);
+    }
 }

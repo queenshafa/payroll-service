@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Employees Data')
 
 @section('content')
     {{-- Header --}}

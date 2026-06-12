@@ -12,13 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class SalaryController extends Controller
 {
     public function index() {
-        $salaries = Salary::whereHas('employee', function ($query) {
-            $query->where('user_id', Auth::id());
-        })
-        ->with('employee')
-        ->get();
-
-        return view('salary.index', compact('salaries'));
+        $employees = Employee::where('user_id', Auth::id())
+            ->with('salaries')
+            ->get();
+        return view('salary.index', compact('employees'));
     }
 
     public function create($employeeId) {

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Payroll')
+
 @section('content')
     {{-- Header --}}
     <div class="h-[100px] flex flex-col justify-center px-6 bg-cover bg-center rounded-lg mb-8"
@@ -67,7 +69,10 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
-                    @forelse ($salaries as $salary)
+                    @forelse ($employees as $employee)
+                        @php
+                            $salary = $employee->salaries->first();
+                        @endphp
                         <tr class="hover:bg-gray-50 transition">
                             <td class="px-6 py-4 text-gray-400">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">
@@ -75,35 +80,30 @@
                                     <div
                                         class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold text-xs shrink-0">
                                         B</div>
-                                    <span class="font-medium text-gray-800">{{ $salary->employee->name }}</span>
+                                    <span class="font-medium text-gray-800">{{ $employee->name }}</span>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-gray-500">{{ $salary->employee->position }}</td>
+                            <td class="px-6 py-4 text-gray-500">{{ $employee->position }}</td>
                             <td class="px-6 py-4 text-right text-gray-700">Rp.
-                                {{ number_format($salary->gaji_pokok, 0, '.', '.') }}</td>
+                                {{ number_format($salary?->gaji_pokok ?? $employee->salary, 0, '.', '.') }}</td>
                             <td class="px-6 py-4 text-right text-green-600 font-medium">+ Rp
-                                {{ number_format($salary->tunjangan_makan + $salary->tunjangan_transportasi, 0, '.', '.') }}
+                                {{ number_format($salary?->tunjangan_makan ?? (0 + $salary?->tunjangan_transportasi ?? 0), 0, '.', '.') }}
                             </td>
                             <td class="px-6 py-4 text-right text-red-500 font-medium">- Rp
-                                {{ number_format($salary->potongan, 0, '.', '.') }}</td>
+                                {{ number_format($salary?->potongan, 0, '.', '.') }}</td>
                             <td class="px-6 py-4 text-right font-bold text-gray-800">Rp
-                                {{ number_format($salary->gaji_bersih, 0, '.', '.') }}</td>
+                                {{ number_format($salary?->gaji_bersih ?? $employee->salary, 0, '.', '.') }}</td>
                             <td class="px-6 py-4">
-                                <div class="flex items-center justify-center gap-2">
-                                    {{-- Add Salary Button --}}
-                                    <a href="{{ route('salary.create', $salary->employee->id) }}"
+                                <div class="flex items-center justify-center gap-2"> {{-- Add Salary Button --}} <a
+                                        href="{{ route('salary.create', $salary->employee->id) }}"
                                         class="inline-flex items-center gap-1.5 px-3 py-1.5 text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition text-xs font-medium">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                        </svg>
-                                    </a>
-                                    <a href="{{ route('salary.show', $salary->id) }}"
+                                        </svg> </a> <a href="{{ route('salary.show', $salary->id) }}"
                                         class="px-3 py-1.5 text-xs font-medium text-white bg-primary rounded-lg hover:bg-primary/80 transition">Detail</a>
-                                    <form action="{{ route('salary.delete', $salary->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
+                                    <form action="{{ route('salary.delete', $salary->id) }}" method="POST"> @csrf
+                                        @method('DELETE') <button type="submit"
                                             class="px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition">Delete</button>
                                     </form>
                                 </div>
@@ -111,7 +111,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td>No salary data yet</td>
+                            <td class="text-center">No salary data yet</td>
                         </tr>
                     @endforelse
 

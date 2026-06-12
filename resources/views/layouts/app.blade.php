@@ -92,7 +92,7 @@
                     <button id="hamburgerBtn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 flex-shrink-0">
                         <i class="ri-menu-5-line"></i>
                     </button>
-                    <h1 class="text-sm lg:text-lg font-semibold text-primary truncate">{{ $title ?? 'Dashboard' }}</h1>
+                    <h1 class="text-sm lg:text-lg font-semibold text-primary truncate">@yield('title', 'Dashboard')</h1>
                 </div>
                 <span
                     class="text-sm text-black bg-secondary p-2 rounded-lg whitespace-nowrap flex-shrink-0 ml-2">{{ now()->translatedFormat('l, d F Y') }}</span>
