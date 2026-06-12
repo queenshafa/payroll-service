@@ -25,7 +25,7 @@ class EmployeeController extends Controller
 
         Employee::create($data);
 
-        return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil ditambahkan!');
+        return redirect()->route('karyawan.index')->with('success', 'Employee successfully added!');
     }
 
     public function edit($id) {

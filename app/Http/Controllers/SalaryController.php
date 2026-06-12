@@ -30,6 +30,7 @@ class SalaryController extends Controller
             ->findOrFail($request->employee_id);
 
         Salary::create([
+            'user_id' => Auth::id(),
             'employee_id' => $employee->id,
             'gaji_pokok' => $request->gaji_pokok,
             'tunjangan_makan' => $request->tunjangan_makan,
@@ -41,7 +42,7 @@ class SalaryController extends Controller
         ]);
 
         return redirect()->route('salary.index')
-            ->with('success', 'Gaji berhasil ditambahkan!');
+            ->with('success', 'Salary successfully added!');
     }
 
     public function show($id) {
@@ -71,7 +72,7 @@ class SalaryController extends Controller
             ->findOrFail($id);
         $salary->delete();
 
-    return redirect()->route('salary.index')->with('success', 'Slip gaji berhasil dihapus!');
+    return redirect()->route('salary.index')->with('success', 'Payroll successfully deleted!!');
 
     }
 }
